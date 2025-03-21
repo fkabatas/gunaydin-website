@@ -116,7 +116,6 @@
             message.classList.add("show");
             message.style.display = "block";
 
-            // Butonları geçici olarak devre dışı bırak
             messageBtn.disabled = true;
             kissBtn.disabled = true;
 
@@ -126,8 +125,6 @@
                     message.style.display = "none";
                     messageBtn.disabled = false;
                     kissBtn.disabled = false;
-
-                    // Öpücük butonunu eski yerine al
                     kissBtn.style.left = originalKissPosition.left;
                     kissBtn.style.top = originalKissPosition.top;
                 }, 400);
@@ -135,11 +132,13 @@
         }
 
         function moveButton() {
-            let maxX = window.innerWidth - kissBtn.offsetWidth - 20;
-            let maxY = window.innerHeight - kissBtn.offsetHeight - 20;
+            let buttonWidth = kissBtn.offsetWidth;
+            let buttonHeight = kissBtn.offsetHeight;
+            let maxX = window.innerWidth - buttonWidth - 20;
+            let maxY = window.innerHeight - buttonHeight - 20;
             let minX = 20;
             let minY = 20;
-            
+
             let x = Math.random() * (maxX - minX) + minX;
             let y = Math.random() * (maxY - minY) + minY;
 
