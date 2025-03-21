@@ -20,6 +20,8 @@
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
+            overflow: hidden;
+            position: relative;
         }
         img {
             width: 70%;
@@ -34,6 +36,8 @@
             gap: 15px;
             align-items: center;
             width: 100%;
+            position: relative;
+            z-index: 10;
         }
         button {
             padding: 12px 18px;
@@ -75,6 +79,17 @@
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
         }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: floatUp 2s linear forwards;
+            z-index: 20;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
     </style>
 </head>
 <body>
@@ -94,6 +109,7 @@
         let messageBtn = document.getElementById("messageBtn");
         let kissBtn = document.getElementById("kissBtn");
         let clickCount = 0;
+        let originalKissPosition = { left: kissBtn.style.left, top: kissBtn.style.top };
 
         function showMessage(text) {
             message.innerText = text;
@@ -108,10 +124,12 @@
                 message.classList.remove("show");
                 setTimeout(() => {
                     message.style.display = "none";
-
-                    // Butonları tekrar aktif et
                     messageBtn.disabled = false;
                     kissBtn.disabled = false;
+
+                    // Öpücük butonunu eski yerine al
+                    kissBtn.style.left = originalKissPosition.left;
+                    kissBtn.style.top = originalKissPosition.top;
                 }, 400);
             }, 2000);
         }
@@ -128,6 +146,23 @@
             kissBtn.style.top = `${y}px`;
         }
 
+        function createHeartEffect() {
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                document.body.appendChild(heart);
+
+                let x = Math.random() * window.innerWidth;
+                let y = window.innerHeight - 30;
+
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+
         function handleClick(event) {
             event.preventDefault();
             showMessage("Günaydın Buğracımm😚");
@@ -140,6 +175,7 @@
 
             if (clickCount === 10) {
                 showMessage("Yakalandıımmm🙈");
+                createHeartEffect();
                 clickCount = 0;
             }
         }
