@@ -137,9 +137,11 @@
         function moveButton() {
             let maxX = window.innerWidth - kissBtn.offsetWidth - 20;
             let maxY = window.innerHeight - kissBtn.offsetHeight - 20;
+            let minX = 20;
+            let minY = 20;
             
-            let x = Math.random() * maxX;
-            let y = Math.random() * maxY;
+            let x = Math.random() * (maxX - minX) + minX;
+            let y = Math.random() * (maxY - minY) + minY;
 
             kissBtn.style.position = "absolute";
             kissBtn.style.left = `${x}px`;
