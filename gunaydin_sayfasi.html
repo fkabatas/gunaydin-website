@@ -11,15 +11,15 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background-color: #ffe6f2; /* Tatlı bir pembe ton */
+            background-color: #ffe6f2;
             overflow: hidden;
             margin: 0;
-            position: relative; /* Butonların ekran dışına taşmaması için */
         }
         img {
             width: 30%;
             height: auto;
             margin-bottom: 20px;
+            border-radius: 15px;
         }
         .container {
             display: flex;
@@ -59,23 +59,12 @@
             display: none;
             text-align: center;
         }
-        @keyframes heart-pop {
-            0% { transform: scale(0); opacity: 1; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 0; }
-        }
-        .heart {
-            position: absolute;
-            font-size: 40px;
-            color: red;
-            animation: heart-pop 1s ease-in-out;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Güncellenmiş kedi resmi -->
-    <img src="A588C60F-925E-47A9-B3BC-B5CC5DF7C932.jpeg" alt="Mutlu Kedi">
+    <!-- Yeni kedi resmi -->
+    <img src="https://i.pinimg.com/736x/0c/0e/9e/0c0e9e1d6b3a5f6c9c24b9cbbf1e6f8b.jpg" alt="Tatlı Kedi">
 
     <div class="container">
         <button id="messageBtn">Günaydın Mesajı</button>
@@ -105,38 +94,17 @@
             kissBtn.style.top = `${y}px`;
         }
 
-        function createHeart() {
-            let heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = `${Math.random() * window.innerWidth}px`;
-            heart.style.top = `${Math.random() * window.innerHeight}px`;
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 1000);
-        }
-
-        function handleKissClick() {
+        kissBtn.addEventListener("click", function() {
             clickCount++;
             moveButton();
 
             if (clickCount === 5) {
                 let message = document.getElementById("message");
-                message.innerText = "Günaydın Öpücüğü Yakalandı! 💋";
+                message.innerText = "Yakalandıımmm🙈";
                 message.style.display = "block";
-                
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(createHeart, i * 200);
-                }
-                
                 clickCount = 0;
             }
-        }
-
-        kissBtn.addEventListener("click", handleKissClick);
-        kissBtn.addEventListener("touchstart", handleKissClick);
+        });
     </script>
 
 </body>
