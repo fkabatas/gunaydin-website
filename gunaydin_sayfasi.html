@@ -41,14 +41,6 @@
             background-color: #ff4d94;
             color: white;
         }
-        #message {
-            font-size: 22px;
-            color: #d63384;
-            font-weight: bold;
-            margin-top: 20px;
-            display: none;
-            text-align: center;
-        }
         .bubble {
             position: absolute;
             background-color: rgba(255, 0, 127, 0.9);
@@ -57,7 +49,7 @@
             border-radius: 20px;
             font-size: 18px;
             font-weight: bold;
-            animation: fadeInOut 3s ease-in-out;
+            animation: fadeInOut 2s ease-in-out;
             text-align: center;
         }
         @keyframes fadeInOut {
@@ -88,17 +80,13 @@
         <button id="kissBtn">Günaydın Öpücüğü</button>
     </div>
 
-    <div id="message"></div>
-
     <script>
-        document.getElementById("messageBtn").addEventListener("click", function() {
-            let message = document.getElementById("message");
-            message.innerText = "Günaydın Buğracımm😚";
-            message.style.display = "block";
-        });
-
         let kissBtn = document.getElementById("kissBtn");
         let clickCount = 0;
+
+        document.getElementById("messageBtn").addEventListener("click", function() {
+            showBubble("Günaydın Buğracımm 😚");
+        });
 
         function moveButton() {
             let maxX = window.innerWidth - kissBtn.offsetWidth; 
@@ -120,7 +108,7 @@
             moveButton();
 
             if (clickCount === 10) {
-                showBubble("Yakalandıımmm🙈");
+                showBubble("Yakalandıımmm 🙈");
                 createHeartEffect();
                 clickCount = 0; 
             }
@@ -138,7 +126,8 @@
 
             setTimeout(() => {
                 bubble.remove();
-            }, 3000);
+                resetButtons();
+            }, 2000);
         }
 
         function createHeartEffect() {
@@ -157,6 +146,10 @@
                     heart.remove();
                 }, 2000);
             }
+        }
+
+        function resetButtons() {
+            kissBtn.style.position = "static"; 
         }
     </script>
 
