@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Günaydın ❤️</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             display: flex;
             justify-content: center;
@@ -14,9 +19,12 @@
             background-color: #ffe6f2;
             overflow: hidden;
             margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
         img {
-            width: 40%;
+            width: 70%;
+            max-width: 300px;
             height: auto;
             margin-bottom: 20px;
             border-radius: 15px;
@@ -35,8 +43,8 @@
             cursor: pointer;
             border-radius: 10px;
             transition: 0.3s;
-            width: 70%;
-            max-width: 300px;
+            width: 80%;
+            max-width: 280px;
             background-color: #ff4d94;
             color: white;
         }
@@ -44,7 +52,7 @@
             background-color: #d63384;
         }
         #message {
-            font-size: 22px;
+            font-size: 20px;
             color: white;
             font-weight: bold;
             text-align: center;
@@ -54,11 +62,11 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             background-color: #ff4d94;
-            padding: 20px 30px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
             opacity: 0;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
         }
         .show {
             display: block;
@@ -89,7 +97,6 @@
             message.innerText = text;
             message.classList.add("show");
 
-            // 2 saniye sonra mesaj kaybolacak ve butonlar eski haline dönecek
             setTimeout(() => {
                 message.classList.remove("show");
                 resetButtons();
@@ -97,7 +104,7 @@
         }
 
         function resetButtons() {
-            kissBtn.style.position = "static";  // Buton yerine sabit dönecek
+            kissBtn.style.position = "static";  // Buton eski yerine dönecek
             kissBtn.style.left = "";
             kissBtn.style.top = "";
         }
@@ -107,8 +114,8 @@
         });
 
         function moveButton() {
-            let maxX = window.innerWidth - kissBtn.offsetWidth;
-            let maxY = window.innerHeight - kissBtn.offsetHeight;
+            let maxX = window.innerWidth - kissBtn.offsetWidth - 20;
+            let maxY = window.innerHeight - kissBtn.offsetHeight - 20;
             
             let x = Math.random() * maxX;
             let y = Math.random() * maxY;
