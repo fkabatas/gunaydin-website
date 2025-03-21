@@ -46,6 +46,7 @@
             max-width: 280px;
             background-color: #ff4d94;
             color: white;
+            position: relative;
         }
         button:hover {
             background-color: #d63384;
@@ -94,14 +95,16 @@
             message.innerText = text;
             message.classList.add("show");
 
-            setTimeout(() => {
-                message.classList.remove("show");
-                resetButtons();
-            }, 2000);
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    message.classList.remove("show");
+                    resetButtons();
+                }, 2000);
+            });
         }
 
         function resetButtons() {
-            kissBtn.style.position = "static";
+            kissBtn.style.position = "relative";
             kissBtn.style.left = "";
             kissBtn.style.top = "";
         }
@@ -119,12 +122,12 @@
         }
 
         function handleClick(event) {
-            event.preventDefault(); // Dokunma/tıklama çakışmasını önler
+            event.preventDefault(); 
             showMessage("Günaydın Buğracımm😚");
         }
 
         function handleKissClick(event) {
-            event.preventDefault(); // Dokunma/tıklama çakışmasını önler
+            event.preventDefault(); 
             clickCount++;
             moveButton();
 
@@ -134,12 +137,11 @@
             }
         }
 
-        // Hem mobil dokunma (touchstart) hem de bilgisayar tıklama (click) desteği
         messageBtn.addEventListener("click", handleClick);
-        messageBtn.addEventListener("touchstart", handleClick, { passive: false });
+        messageBtn.addEventListener("touchend", handleClick, { passive: false });
 
         kissBtn.addEventListener("click", handleKissClick);
-        kissBtn.addEventListener("touchstart", handleKissClick, { passive: false });
+        kissBtn.addEventListener("touchend", handleKissClick, { passive: false });
     </script>
 
 </body>
