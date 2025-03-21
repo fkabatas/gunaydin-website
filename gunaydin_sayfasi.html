@@ -61,12 +61,19 @@
             top: 40%;
             left: 50%;
             width: 300px;
-            background-color: black; /* Test için siyah */
+            background-color: rgba(255, 100, 150, 0.95);
             padding: 15px 25px;
-            border-radius: 15px;
+            border-radius: 50px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-            display: none; /* Animasyonu kaldırdım, direkt `block` yapacağız */
+            display: none;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
             z-index: 9999;
+        }
+        #message.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
         }
     </style>
 </head>
@@ -90,10 +97,22 @@
 
         function showMessage(text) {
             message.innerText = text;
-            message.style.display = "block"; // TEST İÇİN display:block YAPTIK
+            message.classList.add("show");
+            message.style.display = "block";
+
+            // Butonları geçici olarak devre dışı bırak
+            messageBtn.disabled = true;
+            kissBtn.disabled = true;
 
             setTimeout(() => {
-                message.style.display = "none";
+                message.classList.remove("show");
+                setTimeout(() => {
+                    message.style.display = "none";
+
+                    // Butonları tekrar aktif et
+                    messageBtn.disabled = false;
+                    kissBtn.disabled = false;
+                }, 400);
             }, 2000);
         }
 
