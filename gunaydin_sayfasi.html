@@ -25,8 +25,8 @@
         .container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
             align-items: center;
+            gap: 15px; 
             width: 100%;
         }
         button {
@@ -38,17 +38,8 @@
             transition: 0.3s;
             width: 70%;
             max-width: 300px;
-        }
-        #messageBtn {
-            background-color: #ff99cc;
-            color: white;
-        }
-        #kissBtn {
             background-color: #ff4d94;
             color: white;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
         }
         #message {
             font-size: 22px;
@@ -58,7 +49,6 @@
             display: none;
             text-align: center;
         }
-        /* Baloncuk Stili */
         .bubble {
             position: absolute;
             background-color: rgba(255, 0, 127, 0.9);
@@ -75,7 +65,6 @@
             50% { opacity: 1; transform: scale(1); }
             100% { opacity: 0; transform: scale(0.8); }
         }
-        /* Kalp Efekti */
         .heart {
             position: absolute;
             width: 20px;
@@ -92,7 +81,6 @@
 </head>
 <body>
 
-    <!-- Kedi Resmi -->
     <img src="https://r.resimlink.com/RmIQqiP.jpeg" alt="Tatlı Kedi">
 
     <div class="container">
@@ -114,7 +102,7 @@
 
         function moveButton() {
             let maxX = window.innerWidth - kissBtn.offsetWidth; 
-            let maxY = window.innerHeight - kissBtn.offsetHeight; 
+            let maxY = window.innerHeight - kissBtn.offsetHeight - 50; 
             
             let x = Math.random() * maxX;
             let y = Math.random() * maxY;
@@ -122,6 +110,7 @@
             x = Math.max(0, Math.min(x, maxX)); 
             y = Math.max(0, Math.min(y, maxY)); 
 
+            kissBtn.style.position = "absolute";
             kissBtn.style.left = `${x}px`;
             kissBtn.style.top = `${y}px`;
         }
