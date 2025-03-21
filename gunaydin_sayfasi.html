@@ -61,6 +61,7 @@
             transition: transform 0.5s ease-out, opacity 0.5s ease-out;
         }
         .show {
+            display: block;
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
         }
@@ -68,7 +69,7 @@
 </head>
 <body>
 
-    <!-- Güncellenmiş kedi resmi -->
+    <!-- Kedi resmi -->
     <img src="https://r.resimlink.com/RmIQqiP.jpeg" alt="Tatlı Kedi">
 
     <div class="container">
@@ -76,20 +77,34 @@
         <button id="kissBtn">Günaydın Öpücüğü</button>
     </div>
 
-    <div id="message">Yakalandıımmm🙈</div>
+    <div id="message"></div>
 
     <script>
-        document.getElementById("messageBtn").addEventListener("click", function() {
-            let message = document.getElementById("message");
-            message.innerText = "Günaydın Buğracımm😚";
-            message.classList.add("show");
-            setTimeout(() => {
-                message.classList.remove("show");
-            }, 2000);
-        });
-
+        let message = document.getElementById("message");
+        let messageBtn = document.getElementById("messageBtn");
         let kissBtn = document.getElementById("kissBtn");
         let clickCount = 0;
+
+        function showMessage(text) {
+            message.innerText = text;
+            message.classList.add("show");
+
+            // 2 saniye sonra mesaj kaybolacak ve butonlar eski haline dönecek
+            setTimeout(() => {
+                message.classList.remove("show");
+                resetButtons();
+            }, 2000);
+        }
+
+        function resetButtons() {
+            kissBtn.style.position = "static";  // Buton yerine sabit dönecek
+            kissBtn.style.left = "";
+            kissBtn.style.top = "";
+        }
+
+        messageBtn.addEventListener("click", function() {
+            showMessage("Günaydın Buğracımm😚");
+        });
 
         function moveButton() {
             let maxX = window.innerWidth - kissBtn.offsetWidth;
@@ -108,14 +123,8 @@
             moveButton();
 
             if (clickCount === 10) {
-                let message = document.getElementById("message");
-                message.innerText = "Yakalandıımmm🙈";
-                message.classList.add("show");
-                
-                setTimeout(() => {
-                    message.classList.remove("show");
-                    clickCount = 0; // Sayaç sıfırlanıyor
-                }, 2000);
+                showMessage("Yakalandıımmm🙈");
+                clickCount = 0; // Sayaç sıfırlanıyor
             }
         });
     </script>
