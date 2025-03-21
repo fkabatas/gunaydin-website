@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,6 @@
             flex-direction: column;
             height: 100vh;
             background-color: #ffe6f2;
-            overflow: hidden;
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -107,10 +106,6 @@
             kissBtn.style.top = "";
         }
 
-        messageBtn.addEventListener("click", function() {
-            showMessage("Günaydın Buğracımm😚");
-        });
-
         function moveButton() {
             let maxX = window.innerWidth - kissBtn.offsetWidth - 20;
             let maxY = window.innerHeight - kissBtn.offsetHeight - 20;
@@ -123,7 +118,11 @@
             kissBtn.style.top = `${y}px`;
         }
 
-        kissBtn.addEventListener("click", function() {
+        function handleClick() {
+            showMessage("Günaydın Buğracımm😚");
+        }
+
+        function handleKissClick() {
             clickCount++;
             moveButton();
 
@@ -131,7 +130,14 @@
                 showMessage("Yakalandıımmm🙈");
                 clickCount = 0; 
             }
-        });
+        }
+
+        // Hem mobil dokunma (touchstart) hem de bilgisayar tıklama (click) desteği
+        messageBtn.addEventListener("click", handleClick);
+        messageBtn.addEventListener("touchstart", handleClick);
+
+        kissBtn.addEventListener("click", handleKissClick);
+        kissBtn.addEventListener("touchstart", handleKissClick);
     </script>
 
 </body>
