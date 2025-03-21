@@ -118,11 +118,13 @@
             kissBtn.style.top = `${y}px`;
         }
 
-        function handleClick() {
+        function handleClick(event) {
+            event.preventDefault(); // Dokunma/tıklama çakışmasını önler
             showMessage("Günaydın Buğracımm😚");
         }
 
-        function handleKissClick() {
+        function handleKissClick(event) {
+            event.preventDefault(); // Dokunma/tıklama çakışmasını önler
             clickCount++;
             moveButton();
 
@@ -134,10 +136,10 @@
 
         // Hem mobil dokunma (touchstart) hem de bilgisayar tıklama (click) desteği
         messageBtn.addEventListener("click", handleClick);
-        messageBtn.addEventListener("touchstart", handleClick);
+        messageBtn.addEventListener("touchstart", handleClick, { passive: false });
 
         kissBtn.addEventListener("click", handleKissClick);
-        kissBtn.addEventListener("touchstart", handleKissClick);
+        kissBtn.addEventListener("touchstart", handleKissClick, { passive: false });
     </script>
 
 </body>
