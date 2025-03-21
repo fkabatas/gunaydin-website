@@ -56,7 +56,6 @@
             color: white;
             font-weight: bold;
             text-align: center;
-            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -69,7 +68,6 @@
             transition: transform 0.4s ease-out, opacity 0.4s ease-out;
         }
         .show {
-            display: block;
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
         }
@@ -104,7 +102,7 @@
         }
 
         function resetButtons() {
-            kissBtn.style.position = "static";  // Buton eski yerine dönecek
+            kissBtn.style.position = "static";
             kissBtn.style.left = "";
             kissBtn.style.top = "";
         }
@@ -131,7 +129,7 @@
 
             if (clickCount === 10) {
                 showMessage("Yakalandıımmm🙈");
-                clickCount = 0; // Sayaç sıfırlanıyor
+                clickCount = 0; 
             }
         });
     </script>
