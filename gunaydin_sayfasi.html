@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Günaydın ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #ffe6f2; /* Tatlı bir pembe ton */
+            overflow: hidden;
+        }
+        img {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 12px 18px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        #messageBtn {
+            background-color: #ff99cc;
+            color: white;
+        }
+        #kissBtn {
+            background-color: #ff4d94;
+            color: white;
+            position: absolute;
+        }
+        #message {
+            font-size: 22px;
+            color: #d63384;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+        @keyframes heart-pop {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            color: red;
+            animation: heart-pop 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mutlu kedi görseli -->
+    <img src="https://i.pinimg.com/originals/35/74/29/35742923596c16ff1e8e7c6fa9b45149.jpg" alt="Mutlu Kedi">
+
+    <div class="container">
+        <!-- Günaydın Mesajı butonu -->
+        <button id="messageBtn">Günaydın Mesajı</button>
+
+        <!-- Günaydın Öpücüğü butonu -->
+        <button id="kissBtn">Günaydın Öpücüğü</button>
+    </div>
+
+    <!-- Mesajın görüneceği alan -->
+    <div id="message"></div>
+
+    <script>
+        // Günaydın Mesajı butonu
+        document.getElementById("messageBtn").addEventListener("click", function() {
+            let message = document.getElementById("message");
+            message.innerText = "Günaydın Buğracımm😚";
+            message.style.display = "block";
+        });
+
+        // Günaydın Öpücüğü butonu (kaçan buton)
+        let kissBtn = document.getElementById("kissBtn");
+        let isCaught = false; // Butonun yakalanıp yakalanmadığını kontrol etmek için
+
+        kissBtn.addEventListener("mouseover", function() {
+            if (!isCaught) {
+                let x = Math.random() * (window.innerWidth - 100);
+                let y = Math.random() * (window.innerHeight - 100);
+                kissBtn.style.left = `${x}px`;
+                kissBtn.style.top = `${y}px`;
+            }
+        });
+
+        kissBtn.addEventListener("click", function() {
+            isCaught = true;
+            let message = document.getElementById("message");
+            message.innerText = "Yakalandımm🙈";
+            message.style.display = "block";
+
+            // Kalp efekti oluştur
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerText = "❤️";
+            heart.style.left = `${kissBtn.offsetLeft + 20}px`;
+            heart.style.top = `${kissBtn.offsetTop - 30}px`;
+            document.body.appendChild(heart);
+
+            // Kalbi 1 saniye sonra kaldır
+            setTimeout(() => {
+                heart.remove();
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
